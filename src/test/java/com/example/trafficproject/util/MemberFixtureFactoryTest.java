@@ -1,6 +1,6 @@
-package com.example.fastcampusmysql.util;
+package com.example.trafficproject.util;
 
-import com.example.fastcampusmysql.domain.member.entity.Member;
+import com.example.trafficproject.domain.member.entity.Member;
 import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
 
@@ -8,7 +8,7 @@ import org.jeasy.random.EasyRandomParameters;
  * 테스트에 필요한 데이터들에대한 케이스를 랜덤하게 생성
  * EasyRandom
  */
-public class MemberFixtureFactory {
+public class MemberFixtureFactoryTest {
     /***
      * default seed
      * @return

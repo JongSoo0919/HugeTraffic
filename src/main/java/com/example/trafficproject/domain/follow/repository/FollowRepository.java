@@ -1,8 +1,7 @@
-package com.example.fastcampusmysql.domain.follow.repository;
+package com.example.trafficproject.domain.follow.repository;
 
-import com.example.fastcampusmysql.domain.follow.entitiy.Follow;
+import com.example.trafficproject.domain.follow.entitiy.Follow;
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

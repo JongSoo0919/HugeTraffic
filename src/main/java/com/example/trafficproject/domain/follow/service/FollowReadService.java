@@ -1,7 +1,7 @@
-package com.example.fastcampusmysql.domain.follow.service;
+package com.example.trafficproject.domain.follow.service;
 
-import com.example.fastcampusmysql.domain.follow.entitiy.Follow;
-import com.example.fastcampusmysql.domain.follow.repository.FollowRepository;
+import com.example.trafficproject.domain.follow.entitiy.Follow;
+import com.example.trafficproject.domain.follow.repository.FollowRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

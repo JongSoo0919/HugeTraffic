@@ -1,6 +1,6 @@
-package com.example.fastcampusmysql.domain.member.repository;
+package com.example.trafficproject.domain.member.repository;
 
-import com.example.fastcampusmysql.domain.member.entity.MemberNicknameHistory;
+import com.example.trafficproject.domain.member.entity.MemberNicknameHistory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;

@@ -1,8 +1,7 @@
-package com.example.fastcampusmysql.domain.member.repository;
+package com.example.trafficproject.domain.member.repository;
 
-import com.example.fastcampusmysql.domain.member.entity.Member;
+import com.example.trafficproject.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

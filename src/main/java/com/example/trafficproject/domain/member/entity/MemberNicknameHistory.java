@@ -1,8 +1,7 @@
-package com.example.fastcampusmysql.domain.member.entity;
+package com.example.trafficproject.domain.member.entity;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

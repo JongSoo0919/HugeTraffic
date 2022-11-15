@@ -1,13 +1,11 @@
-package com.example.fastcampusmysql.controller;
+package com.example.trafficproject.controller;
 
-import com.example.fastcampusmysql.domain.member.dto.MemberDto;
-import com.example.fastcampusmysql.domain.member.dto.MemberNicknameHistoryDto;
-import com.example.fastcampusmysql.domain.member.dto.RegisterMemberCommand;
-import com.example.fastcampusmysql.domain.member.entity.Member;
-import com.example.fastcampusmysql.domain.member.service.MemberReadService;
-import com.example.fastcampusmysql.domain.member.service.MemberWriteService;
+import com.example.trafficproject.domain.member.dto.MemberDto;
+import com.example.trafficproject.domain.member.dto.MemberNicknameHistoryDto;
+import com.example.trafficproject.domain.member.dto.RegisterMemberCommand;
+import com.example.trafficproject.domain.member.service.MemberReadService;
+import com.example.trafficproject.domain.member.service.MemberWriteService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

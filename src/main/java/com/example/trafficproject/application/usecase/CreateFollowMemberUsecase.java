@@ -1,9 +1,8 @@
-package com.example.fastcampusmysql.application.usecase;
+package com.example.trafficproject.application.usecase;
 
-import com.example.fastcampusmysql.domain.follow.service.FollowWriteService;
-import com.example.fastcampusmysql.domain.member.dto.MemberDto;
-import com.example.fastcampusmysql.domain.member.entity.Member;
-import com.example.fastcampusmysql.domain.member.service.MemberReadService;
+import com.example.trafficproject.domain.follow.service.FollowWriteService;
+import com.example.trafficproject.domain.member.dto.MemberDto;
+import com.example.trafficproject.domain.member.service.MemberReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,13 +1,10 @@
-package com.example.fastcampusmysql.domain.member;
+package com.example.trafficproject.member;
 
-import com.example.fastcampusmysql.domain.member.entity.Member;
-import com.example.fastcampusmysql.util.MemberFixtureFactory;
+import com.example.trafficproject.domain.member.entity.Member;
+import com.example.trafficproject.util.MemberFixtureFactoryTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 
 public class MemberTest {
     //insert, select에 대한 테스트 코드도 짜보자.
@@ -15,7 +12,7 @@ public class MemberTest {
     @DisplayName("회원은 닉네임 변경이 가능하다.")
     @Test
     public void testChangeName() {
-        Member member = MemberFixtureFactory.create();
+        Member member = MemberFixtureFactoryTest.create();
         String expectedName = "pnu";
 
         member.changeNickname(expectedName);
@@ -25,7 +22,7 @@ public class MemberTest {
     @DisplayName("회원의 닉네임은 10자를 초과할 수 없다")
     @Test
     public void testNicknameMaxLength() {
-        Member member = MemberFixtureFactory.create();
+        Member member = MemberFixtureFactoryTest.create();
         String overMaxLength = "pnu12345678910";
 
         Assertions.assertThrows(

@@ -1,4 +1,4 @@
-package com.example.fastcampusmysql.domain.follow.entitiy;
+package com.example.trafficproject.domain.follow.entitiy;
 
 import lombok.Builder;
 import lombok.Getter;
