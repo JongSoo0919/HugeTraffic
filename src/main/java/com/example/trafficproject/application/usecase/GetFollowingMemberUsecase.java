@@ -1,6 +1,6 @@
 package com.example.trafficproject.application.usecase;
 
-import com.example.trafficproject.domain.follow.entitiy.Follow;
+import com.example.trafficproject.domain.follow.entity.Follow;
 import com.example.trafficproject.domain.follow.service.FollowReadService;
 import com.example.trafficproject.domain.member.dto.MemberDto;
 import com.example.trafficproject.domain.member.service.MemberReadService;

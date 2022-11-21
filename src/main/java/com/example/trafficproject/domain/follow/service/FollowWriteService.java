@@ -1,6 +1,6 @@
 package com.example.trafficproject.domain.follow.service;
 
-import com.example.trafficproject.domain.follow.entitiy.Follow;
+import com.example.trafficproject.domain.follow.entity.Follow;
 import com.example.trafficproject.domain.follow.repository.FollowRepository;
 import com.example.trafficproject.domain.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
