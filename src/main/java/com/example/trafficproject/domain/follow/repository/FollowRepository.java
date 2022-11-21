@@ -1,6 +1,6 @@
 package com.example.trafficproject.domain.follow.repository;
 
-import com.example.trafficproject.domain.follow.entitiy.Follow;
+import com.example.trafficproject.domain.follow.entity.Follow;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;

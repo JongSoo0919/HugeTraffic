@@ -1,4 +1,4 @@
-package com.example.trafficproject.domain.follow.entitiy;
+package com.example.trafficproject.domain.follow.entity;
 
 import lombok.Builder;
 import lombok.Getter;

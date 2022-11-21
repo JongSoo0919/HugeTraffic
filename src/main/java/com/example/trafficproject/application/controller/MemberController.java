@@ -1,4 +1,4 @@
-package com.example.trafficproject.controller;
+package com.example.trafficproject.application.controller;
 
 import com.example.trafficproject.domain.member.dto.MemberDto;
 import com.example.trafficproject.domain.member.dto.MemberNicknameHistoryDto;
