@@ -1,4 +1,10 @@
 package com.example.trafficproject.domain.post.dto;
 
-public record PostCommand(Long memberId, String contents) {
+/***
+ * 게시물 작성 시 받을 parameter
+ */
+public record PostCommand(
+        Long memberId,
+        String contents
+) {
 }
