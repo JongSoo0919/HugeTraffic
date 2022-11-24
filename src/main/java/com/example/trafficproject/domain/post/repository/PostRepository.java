@@ -42,6 +42,20 @@ public class PostRepository {
 
     }
 
+    /***
+     * batchupdate 함수를 통해 insert문을 단건으로 집어넣는 것이 아닌 한번에 insert (부하를 줄임)
+     * @param posts
+     */
+    public void bulkInsert(List<Post> posts){
+        String sql = String.format("insert into %s (memberId, contents, createdDate, createdAt)" +
+                "values(:memberId, :contents, :createdDate, :createdAt)",TABLE);
+        SqlParameterSource [] params = posts
+                .stream()
+                .map(BeanPropertySqlParameterSource::new)
+                .toArray(SqlParameterSource[]::new);
+        namedParameterJdbcTemplate.batchUpdate(sql,params);
+    }
+
     private Post insert(Post post){
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(namedParameterJdbcTemplate.getJdbcTemplate())
                 .withTableName(TABLE)
