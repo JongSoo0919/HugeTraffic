@@ -1,4 +1,4 @@
-package com.example.trafficproject.member;
+package com.example.trafficproject.domain.member;
 
 import com.example.trafficproject.domain.member.entity.Member;
 import com.example.trafficproject.util.MemberFixtureFactoryTest;

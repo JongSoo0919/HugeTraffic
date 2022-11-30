@@ -2,8 +2,12 @@ package com.example.trafficproject.domain.post.service;
 
 import com.example.trafficproject.domain.post.dto.DailyPostCount;
 import com.example.trafficproject.domain.post.dto.DailyPostCountRequest;
+import com.example.trafficproject.domain.post.entity.Post;
 import com.example.trafficproject.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,5 +26,9 @@ public class PostReadService {
     public List<DailyPostCount> getDailyPostCount(DailyPostCountRequest request){
         // select * from post where memberId = :memberId and createdDate between :firstDate and :lastDate group by createdDate memberId
         return postRepository.groupByCreateDate(request);
+    }
+
+    public Page<Post> getPosts(Long memberId, PageRequest pageRequest){
+        return postRepository.findAllByMemberId(memberId,pageRequest);
     }
 }
