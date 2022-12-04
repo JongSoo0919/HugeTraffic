@@ -116,6 +116,32 @@ public class PostRepository {
                 .build();
     }
 
+    public List<Post> findAllByLessThanIdAndMemberIdAndOrderByIdDesc(Long id, Long memberId, int size){ // JPA Naming 기법을 그대로 따라감 ( 추 후 JPA로 리팩토링 )
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("memberId",memberId)
+                .addValue("id",id)
+                .addValue("size",size);
+        String sql = String.format("""
+                select * from %s
+                where memberId = :memberId and id < :id
+                order by id desc
+                limit :size
+                """,TABLE);
+        return namedParameterJdbcTemplate.query(sql, params, POST_ROW_MAPPER);
+    }
+
+    public List<Post> findAllByMemberIdAndOrderByIdDesc(Long memberId, int size){
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("memberId",memberId)
+                .addValue("size",size);
+        String sql = String.format("""
+                select * from %s
+                where memberId = :memberId
+                order by id desc
+                limit :size
+                """,TABLE);
+        return namedParameterJdbcTemplate.query(sql, params, POST_ROW_MAPPER);
+    }
 
 
 

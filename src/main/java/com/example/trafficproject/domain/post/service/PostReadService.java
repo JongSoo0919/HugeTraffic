@@ -4,6 +4,8 @@ import com.example.trafficproject.domain.post.dto.DailyPostCount;
 import com.example.trafficproject.domain.post.dto.DailyPostCountRequest;
 import com.example.trafficproject.domain.post.entity.Post;
 import com.example.trafficproject.domain.post.repository.PostRepository;
+import com.example.trafficproject.util.CursorRequest;
+import com.example.trafficproject.util.PageCursor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,5 +32,21 @@ public class PostReadService {
 
     public Page<Post> getPosts(Long memberId, PageRequest pageRequest){
         return postRepository.findAllByMemberId(memberId,pageRequest);
+    }
+
+    public PageCursor<Post> getPosts(Long memberId, CursorRequest cursorRequest){
+        List<Post> posts = findAllById(memberId, cursorRequest);
+        Long nextKey = posts.stream()
+                .mapToLong(Post::getId)
+                .min()
+                .orElse(CursorRequest.EMPTY_KEY);
+        return new PageCursor<>(cursorRequest.next(nextKey), posts);
+    }
+
+    private List<Post> findAllById(Long memberId, CursorRequest cursorRequest){
+        if(cursorRequest.hasKey()){
+           return postRepository.findAllByLessThanIdAndMemberIdAndOrderByIdDesc(cursorRequest.key(), memberId, cursorRequest.size());
+        }
+        return postRepository.findAllByMemberIdAndOrderByIdDesc(memberId, cursorRequest.size());
     }
 }
