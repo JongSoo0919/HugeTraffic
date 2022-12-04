@@ -35,3 +35,8 @@ CI/CD
 #### 페이지네이션 방식을 통한 페이징 처리 구현
 #### ㄴ Pageble, PageRequest를 통한 구현
 ####   ㄴ 동적 Sort를 이용한 사용자 지정 정렬 구현 예정
+
+### 12-04
+#### Cursor 기반 페이징 처리 구현
+#### ㄴ PageCursor, CursorRequest를 통한 구현
+####    ㄴ Pagination / Cursor 페이징 처리 차이 정리
