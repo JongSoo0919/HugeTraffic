@@ -40,3 +40,8 @@ CI/CD
 #### Cursor 기반 페이징 처리 구현
 #### ㄴ PageCursor, CursorRequest를 통한 구현
 ####    ㄴ Pagination / Cursor 페이징 처리 차이 정리
+
+### 12-05
+#### 타임라인 구현
+#### ㄴ memberId를 following한 member의 게시물 확인
+####    ㄴ Cursor 기반 
