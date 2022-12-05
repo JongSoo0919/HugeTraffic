@@ -130,6 +130,24 @@ public class PostRepository {
         return namedParameterJdbcTemplate.query(sql, params, POST_ROW_MAPPER);
     }
 
+    public List<Post> findAllByLessThanIdAndInMemberIdsAndOrderByIdDesc(Long id, List<Long> memberIds, int size){ // JPA Naming 기법을 그대로 따라감 ( 추 후 JPA로 리팩토링 )
+        if(memberIds.isEmpty()){
+            return List.of();
+        }
+
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("memberIds",memberIds)
+                .addValue("id",id)
+                .addValue("size",size);
+        String sql = String.format("""
+                select * from %s
+                where memberId in (:memberIds) and id < :id
+                order by id desc
+                limit :size
+                """,TABLE);
+        return namedParameterJdbcTemplate.query(sql, params, POST_ROW_MAPPER);
+    }
+
     public List<Post> findAllByMemberIdAndOrderByIdDesc(Long memberId, int size){
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("memberId",memberId)
@@ -137,6 +155,23 @@ public class PostRepository {
         String sql = String.format("""
                 select * from %s
                 where memberId = :memberId
+                order by id desc
+                limit :size
+                """,TABLE);
+        return namedParameterJdbcTemplate.query(sql, params, POST_ROW_MAPPER);
+    }
+
+    public List<Post> findAllByMemberIdAndOrderByIdDesc(List<Long> memberIds, int size){
+        if(memberIds.isEmpty()){
+            return List.of();
+        }
+
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("memberIds",memberIds)
+                .addValue("size",size);
+        String sql = String.format("""
+                select * from %s
+                where memberId in (:memberIds)
                 order by id desc
                 limit :size
                 """,TABLE);
