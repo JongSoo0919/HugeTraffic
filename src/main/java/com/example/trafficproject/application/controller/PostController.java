@@ -1,5 +1,6 @@
 package com.example.trafficproject.application.controller;
 
+import com.example.trafficproject.application.usecase.CreatePostUsecase;
 import com.example.trafficproject.application.usecase.GetTimelinePostsUsecase;
 import com.example.trafficproject.domain.post.dto.DailyPostCount;
 import com.example.trafficproject.domain.post.dto.DailyPostCountRequest;
@@ -24,10 +25,11 @@ public class PostController {
     private final PostWriteService postWriteService;
     private final PostReadService postReadService;
     private final GetTimelinePostsUsecase getTimelinePostsUsecase;
+    private final CreatePostUsecase createPostUsecase;
 
     @PostMapping("")
     public Long create(PostCommand command){
-        return postWriteService.create(command);
+        return createPostUsecase.execute(command);
     }
 
     @GetMapping("/daily-post-counts")
@@ -60,7 +62,8 @@ public class PostController {
             CursorRequest cursorRequest
 
     ){
-        return getTimelinePostsUsecase.execute(memberId, cursorRequest);
+        return getTimelinePostsUsecase.executeByTimeline(memberId, cursorRequest);
     }
+
 
 }
