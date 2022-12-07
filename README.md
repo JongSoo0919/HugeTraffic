@@ -45,3 +45,10 @@ CI/CD
 #### 타임라인 구현
 #### ㄴ memberId를 following한 member의 게시물 확인
 ####    ㄴ Cursor 기반 
+
+### 12-07
+#### 타임라인 구현2
+#### ㄴ Fan Out On Read -> Fan Out On Write 방식 으로 변경
+####    ㄴ 조회 시 부담을 주는 것이 아닌 쓰기 시 부담 전가
+####       ㄴ 트레이드 오프 정리 및 버그 픽스 예정
+
