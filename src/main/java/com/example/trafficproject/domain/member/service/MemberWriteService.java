@@ -7,6 +7,8 @@ import com.example.trafficproject.domain.member.repository.MemberNicknameHistory
 import com.example.trafficproject.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 @RequiredArgsConstructor
 @Service
@@ -18,6 +20,7 @@ public class MemberWriteService {
      * 목표 - 회원정보 등록(이메일, 닉네임, 생년월일)
      * 닉네임은 10자를 넘길 수 없다.
      */
+    @Transactional
     public Member create(RegisterMemberCommand command){
         Member member = Member.builder()
                 .nickname(command.nickname())
@@ -35,6 +38,7 @@ public class MemberWriteService {
      * @param memberId
      * @param nickname
      */
+    @Transactional
     public void changeNickname(long memberId, String nickname){
         Member member = memberRepository.findById(memberId).orElseThrow();
         member.changeNickname(nickname);
