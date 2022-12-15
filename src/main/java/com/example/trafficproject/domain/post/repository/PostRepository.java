@@ -38,8 +38,9 @@ public class PostRepository {
             .id(resultSet.getLong("id"))
             .memberId(resultSet.getLong("memberId"))
             .contents(resultSet.getString("contents"))
-            .createDate(resultSet.getObject("createdDate",LocalDate.class))
+            .createDate(resultSet.getObject("createdDate", LocalDate.class))
             .createdAt(resultSet.getObject("createdAt", LocalDateTime.class))
+            .version(resultSet.getLong("version"))
             .likeCount(resultSet.getLong("likeCount"))
             .build();
 
@@ -211,9 +212,12 @@ public class PostRepository {
 
     private Post update(Post post){
         // TODO: implemented soon
-        String sql = String.format("UPDATE %s set memberId = :memberId, contents = :contents, likeCount = :likeCount, createdDate = :createdDate, createdAt = :createdAt WHERE id = :id", TABLE);
+        String sql = String.format("UPDATE %s set memberId = :memberId, contents = :contents, likeCount = :likeCount, createdDate = :createdDate, createdAt = :createdAt, version = :version + 1 WHERE id = :id and version = :version", TABLE);
         SqlParameterSource params = new BeanPropertySqlParameterSource(post);
-        namedParameterJdbcTemplate.update(sql,params);
+        int updatedCount = namedParameterJdbcTemplate.update(sql,params);
+        if(updatedCount == 0) {
+            throw new RuntimeException("갱신 실패");
+        }
         return post;
     }
 }
