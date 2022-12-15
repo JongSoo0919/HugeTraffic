@@ -1,8 +1,10 @@
 package com.example.trafficproject.domain.post.service;
 
+import com.example.trafficproject.domain.member.dto.PostDto;
 import com.example.trafficproject.domain.post.dto.DailyPostCount;
 import com.example.trafficproject.domain.post.dto.DailyPostCountRequest;
 import com.example.trafficproject.domain.post.entity.Post;
+import com.example.trafficproject.domain.post.repository.PostLikeRepository;
 import com.example.trafficproject.domain.post.repository.PostRepository;
 import com.example.trafficproject.util.CursorRequest;
 import com.example.trafficproject.util.PageCursor;
@@ -19,7 +21,7 @@ import java.util.List;
 @Service
 public class PostReadService {
     private final PostRepository postRepository;
-
+    private final PostLikeRepository postLikeRepository;
     /***
      * 작성일자, 작성회원, 작성 게시물 갯수 list 반환
      * @param request
@@ -30,8 +32,21 @@ public class PostReadService {
         return postRepository.groupByCreateDate(request);
     }
 
-    public Page<Post> getPosts(Long memberId, PageRequest pageRequest){
-        return postRepository.findAllByMemberId(memberId,pageRequest);
+    public Page<PostDto> getPosts(Long memberId, PageRequest pageRequest){
+        return postRepository.findAllByMemberId(memberId,pageRequest)
+                .map(this::toDto);
+    }
+
+    public PostDto toDto(Post post){
+        return new PostDto(
+                post.getId(),
+                post.getContents(),
+                post.getCreatedAt(),
+                postLikeRepository.count(post.getId()));
+    }
+
+    public Post getPost(Long postId){
+        return postRepository.findById(postId, false).orElseThrow();
     }
 
     public PageCursor<Post> getPosts(Long memberId, CursorRequest cursorRequest){

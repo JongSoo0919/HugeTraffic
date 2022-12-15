@@ -1,7 +1,9 @@
 package com.example.trafficproject.application.controller;
 
+import com.example.trafficproject.application.usecase.CreatePostLikeUsecase;
 import com.example.trafficproject.application.usecase.CreatePostUsecase;
 import com.example.trafficproject.application.usecase.GetTimelinePostsUsecase;
+import com.example.trafficproject.domain.member.dto.PostDto;
 import com.example.trafficproject.domain.post.dto.DailyPostCount;
 import com.example.trafficproject.domain.post.dto.DailyPostCountRequest;
 import com.example.trafficproject.domain.post.dto.PostCommand;
@@ -26,6 +28,7 @@ public class PostController {
     private final PostReadService postReadService;
     private final GetTimelinePostsUsecase getTimelinePostsUsecase;
     private final CreatePostUsecase createPostUsecase;
+    private final CreatePostLikeUsecase createPostLikeUsecase;
 
     @PostMapping("")
     public Long create(PostCommand command){
@@ -38,7 +41,7 @@ public class PostController {
     }
 
     @GetMapping("/members/{memberId}")
-    public Page<Post> getPosts(
+    public Page<PostDto> getPosts(
             @PathVariable Long memberId,
             @RequestParam Integer page,
             @RequestParam Integer size
@@ -70,10 +73,16 @@ public class PostController {
 //        postWriteService.likePost(postId);
 //    }
 
-    @PostMapping("/{postId}/like/")
+    @PostMapping("/{postId}/like/v1")
     public void likePost(@PathVariable Long postId){
 //        postWriteService.likePost(postId);
         postWriteService.likePostByOptimistickLock(postId);
     }
+
+    @PostMapping("/{postId}/like/v2")
+    public void likePostV2(@PathVariable Long postId, @RequestParam Long memberId){
+        createPostLikeUsecase.execute(postId, memberId);
+    }
+
 
 }
