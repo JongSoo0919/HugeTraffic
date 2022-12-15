@@ -1,5 +1,6 @@
 package com.example.trafficproject.domain.post.repository;
 
+import com.example.trafficproject.domain.member.entity.Member;
 import com.example.trafficproject.domain.post.dto.DailyPostCount;
 import com.example.trafficproject.domain.post.dto.DailyPostCountRequest;
 import com.example.trafficproject.domain.post.entity.Post;
@@ -21,6 +22,7 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
@@ -36,13 +38,15 @@ public class PostRepository {
             .id(resultSet.getLong("id"))
             .memberId(resultSet.getLong("memberId"))
             .contents(resultSet.getString("contents"))
-            .createDate(resultSet.getObject("createdDate",LocalDate.class))
+            .createDate(resultSet.getObject("createdDate", LocalDate.class))
             .createdAt(resultSet.getObject("createdAt", LocalDateTime.class))
+            .version(resultSet.getLong("version"))
+            .likeCount(resultSet.getLong("likeCount"))
             .build();
 
     public Post save(Post post){
         if(post.getId() == null) return insert(post);
-        throw new UnsupportedOperationException("Post는 갱신을 지원하지 않습니다.");
+        return update(post);
     }
 
     public List<DailyPostCount> groupByCreateDate(DailyPostCountRequest request){
@@ -192,5 +196,28 @@ public class PostRepository {
         return namedParameterJdbcTemplate.query(sql,params,POST_ROW_MAPPER);
     }
 
+    public Optional<Post> findById(Long postId, Boolean requiredLock){
+        String sql = String.format("""
+                Select * from %s where id = :postId
+                """,TABLE);
+        if(requiredLock){
+            sql += "FOR UPDATE";
+        }
+        MapSqlParameterSource params = new MapSqlParameterSource().
+                addValue("postId",postId);
 
+        Post nullablePost = namedParameterJdbcTemplate.queryForObject(sql,params,POST_ROW_MAPPER);
+        return Optional.ofNullable(nullablePost);
+    }
+
+    private Post update(Post post){
+        // TODO: implemented soon
+        String sql = String.format("UPDATE %s set memberId = :memberId, contents = :contents, likeCount = :likeCount, createdDate = :createdDate, createdAt = :createdAt, version = :version + 1 WHERE id = :id and version = :version", TABLE);
+        SqlParameterSource params = new BeanPropertySqlParameterSource(post);
+        int updatedCount = namedParameterJdbcTemplate.update(sql,params);
+        if(updatedCount == 0) {
+            throw new RuntimeException("갱신 실패");
+        }
+        return post;
+    }
 }
